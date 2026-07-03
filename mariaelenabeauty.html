@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>María Elena · Perfumería, Cosméticos y Regalería</title>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rosa:    #f5dce6;
+  --rosa-md: #dfa0be;
+  --rosa-dp: #c0618e;
+  --negro:   #1e1619;
+  --crema:   #fffaf8;
+  --gris:    #8a7d83;
+  --borde:   #f0e0e8;
+  --error:   #c0414a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--crema);
+  color:var(--negro);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ====== TOPBAR ====== */
+.topbar{
+  background:var(--negro);
+  color:var(--rosa);
+  text-align:center;
+  font-size:11px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  padding:10px 16px;
+}
+
+/* ====== HEADER ====== */
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,250,248,0.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--borde);
+}
+.header-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.logo-text{
+  font-family:'Allura',cursive;
+  font-size:clamp(30px,5vw,42px);
+  color:var(--negro);
+  line-height:1;
+  text-decoration:none;
+}
+.header-nav{
+  display:flex;
+  gap:28px;
+  list-style:none;
+}
+.header-nav a{
+  font-size:11.5px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gris);
+  text-decoration:none;
+  transition:color .2s;
+}
+.header-nav a:hover{color:var(--negro);}
+.btn-carrito{
+  position:relative;
+  background:var(--negro);
+  color:var(--crema);
+  border:none;
+  padding:10px 20px;
+  font-family:'Jost',sans-serif;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:background .2s;
+  white-space:nowrap;
+}
+.btn-carrito:hover{background:var(--rosa-dp);}
+.carrito-badge{
+  background:var(--rosa-dp);
+  color:#fff;
+  border-radius:50%;
+  width:18px;
+  height:18px;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+  display:none;
+}
+.carrito-badge.visible{display:flex;}
+
+/* ====== HERO ====== */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:clamp(60px,10vw,110px) 24px clamp(50px,8vw,90px);
+  text-align:center;
+}
+.hero-me{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Jost',sans-serif;
+  font-weight:600;
+  font-size:clamp(120px,35vw,300px);
+  color:var(--rosa);
+  letter-spacing:6px;
+  user-select:none;
+  pointer-events:none;
+  white-space:nowrap;
+}
+.hero-content{position:relative;z-index:1;}
+.hero h1{
+  font-family:'Allura',cursive;
+  font-size:clamp(60px,14vw,110px);
+  font-weight:400;
+  line-height:1;
+  color:var(--negro);
+}
+.hero-sub{
+  margin-top:14px;
+  font-size:12px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gris);
+}
+.hero-sub span{color:var(--rosa-dp);margin:0 6px;}
+.hero-cta{
+  margin-top:32px;
+  display:inline-block;
+  background:var(--negro);
+  color:var(--crema);
+  padding:14px 36px;
+  font-size:11.5px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  text-decoration:none;
+  transition:background .2s;
+}
+.hero-cta:hover{background:var(--rosa-dp);}
+
+/* ====== FILTROS ====== */
+.filtros-wrap{
+  position:sticky;
+  top:69px;
+  z-index:90;
+  background:rgba(255,250,248,0.95);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--borde);
+}
+.filtros{
+  max-width:1200px;
+  margin:0 auto;
+  padding:16px 24px;
+  display:flex;
+  gap:clamp(14px,4vw,40px);
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.filtros::-webkit-scrollbar{display:none;}
+.filtros button{
+  background:none;
+  border:none;
+  font-family:'Jost',sans-serif;
+  font-size:12px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--gris);
+  cursor:pointer;
+  padding:5px 2px;
+  white-space:nowrap;
+  position:relative;
+  transition:color .2s;
+}
+.filtros button.activo{color:var(--negro);}
+.filtros button.activo::after{
+  content:'';
+  position:absolute;
+  left:-4px;right:-4px;bottom:-4px;
+  height:5px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath d='M2 6C20 2 35 9 50 5S80 2 98 6' stroke='%23c0618e' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* ====== CATÁLOGO ====== */
+.catalogo{
+  max-width:1200px;
+  margin:0 auto;
+  padding:56px 24px 100px;
+}
+.seccion{margin-bottom:80px;}
+.seccion[hidden]{display:none;}
+.sec-header{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin-bottom:32px;
+}
+.sec-header h2{
+  font-family:'Allura',cursive;
+  font-size:clamp(38px,6vw,52px);
+  color:var(--rosa-dp);
+  font-weight:400;
+}
+.sec-linea{flex:1;height:1px;background:var(--borde);}
+.sec-count{
+  font-size:10.5px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gris);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:24px;
+}
+
+/* ====== TARJETA ====== */
+.card{
+  background:#fff;
+  border:1px solid var(--borde);
+  display:flex;
+  flex-direction:column;
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 32px -16px rgba(192,97,142,.3);
+}
+.card-img{
+  aspect-ratio:1;
+  background:linear-gradient(145deg,var(--rosa) 0%,#fbeef3 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.card-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:none;
+}
+.card-img img.loaded{display:block;}
+.card-placeholder{
+  font-family:'Allura',cursive;
+  font-size:28px;
+  color:var(--rosa-md);
+  opacity:.7;
+  pointer-events:none;
+}
+.badge{
+  position:absolute;
+  top:10px;left:10px;
+  background:var(--negro);
+  color:#fff;
+  font-size:9px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:20px;
+}
+.badge.oferta{background:var(--rosa-dp);}
+
+.card-body{
+  padding:16px 16px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  flex:1;
+}
+.card-marca{
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--rosa-dp);
+}
+.card-nombre{
+  font-family:'Allura',cursive;
+  font-size:24px;
+  line-height:1.15;
+  color:var(--negro);
+}
+.card-desc{
+  font-size:12.5px;
+  color:var(--gris);
+  line-height:1.5;
+  flex:1;
+}
+.card-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px dashed var(--borde);
+}
+.card-precio{
+  font-size:16px;
+  font-weight:500;
+}
+.card-precio small{
+  display:block;
+  font-size:10px;
+  color:var(--gris);
+  font-weight:400;
+}
+.btn-add{
+  background:var(--negro);
+  color:#fff;
+  border:none;
+  padding:9px 14px;
+  font-family:'Jost',sans-serif;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .2s,transform .15s;
+}
+.btn-add:hover{background:var(--rosa-dp);}
+.btn-add:active{transform:scale(.96);}
+.btn-add.agregado{background:var(--rosa-dp);}
+
+/* ====== CARRITO PANEL ====== */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(30,22,25,.45);
+  z-index:200;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s;
+}
+.overlay.open{opacity:1;pointer-events:all;}
+
+.panel-carrito{
+  position:fixed;
+  top:0;right:0;
+  width:min(420px,100vw);
+  height:100%;
+  background:var(--crema);
+  z-index:210;
+  display:flex;
+  flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  overflow:hidden;
+}
+.panel-carrito.open{transform:translateX(0);}
+
+.panel-header{
+  padding:22px 24px 18px;
+  border-bottom:1px solid var(--borde);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.panel-header h2{
+  font-family:'Allura',cursive;
+  font-size:34px;
+  font-weight:400;
+}
+.btn-cerrar{
+  background:none;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+  color:var(--gris);
+  line-height:1;
+  padding:4px;
+  transition:color .2s;
+}
+.btn-cerrar:hover{color:var(--negro);}
+
+.panel-items{
+  flex:1;
+  overflow-y:auto;
+  padding:20px 24px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.carrito-vacio{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  color:var(--gris);
+  text-align:center;
+  padding:40px;
+}
+.carrito-vacio .icon{font-size:40px;opacity:.4;}
+.carrito-vacio p{font-size:13px;letter-spacing:.5px;}
+
+.item-carrito{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--borde);
+}
+.item-thumb{
+  width:60px;height:60px;
+  background:linear-gradient(145deg,var(--rosa),#fbeef3);
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Allura',cursive;
+  font-size:14px;
+  color:var(--rosa-md);
+}
+.item-info{flex:1;min-width:0;}
+.item-nombre{
+  font-family:'Allura',cursive;
+  font-size:20px;
+  line-height:1.1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.item-marca{
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--rosa-dp);
+}
+.item-controles{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:6px;
+}
+.btn-qty{
+  width:24px;height:24px;
+  border:1px solid var(--borde);
+  background:#fff;
+  cursor:pointer;
+  font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s;
+}
+.btn-qty:hover{border-color:var(--rosa-md);}
+.qty-num{
+  font-size:13px;
+  font-weight:500;
+  min-width:20px;
+  text-align:center;
+}
+.item-precio{
+  font-size:14px;
+  font-weight:500;
+  flex-shrink:0;
+}
+.btn-quitar{
+  background:none;
+  border:none;
+  color:var(--gris);
+  cursor:pointer;
+  font-size:16px;
+  padding:2px 4px;
+  transition:color .2s;
+}
+.btn-quitar:hover{color:var(--error);}
+
+.panel-footer{
+  padding:20px 24px 28px;
+  border-top:1px solid var(--borde);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+}
+.total-label{
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gris);
+}
+.total-monto{
+  font-size:22px;
+  font-weight:500;
+}
+
+/* envío radios */
+.envio-opciones{display:flex;flex-direction:column;gap:8px;}
+.envio-opcion{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border:1px solid var(--borde);
+  cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.envio-opcion:has(input:checked){
+  border-color:var(--rosa-dp);
+  background:#fff5f9;
+}
+.envio-opcion input{accent-color:var(--rosa-dp);}
+.envio-opcion-info{flex:1;}
+.envio-opcion-nombre{font-size:13px;font-weight:500;}
+.envio-opcion-sub{font-size:11px;color:var(--gris);}
+.envio-precio{font-size:13px;font-weight:500;}
+
+.btn-wsp{
+  background:#25D366;
+  color:#fff;
+  border:none;
+  padding:16px 24px;
+  font-family:'Jost',sans-serif;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  transition:background .2s;
+}
+.btn-wsp:hover{background:#1da850;}
+.btn-wsp svg{width:18px;height:18px;fill:#fff;flex-shrink:0;}
+
+.pago-info{
+  font-size:11px;
+  color:var(--gris);
+  text-align:center;
+  line-height:1.6;
+}
+
+/* ====== SOBRE NOSOTROS ====== */
+.sobre{
+  background:var(--negro);
+  color:var(--crema);
+  padding:clamp(60px,8vw,100px) 24px;
+  text-align:center;
+}
+.sobre h2{
+  font-family:'Allura',cursive;
+  font-size:clamp(42px,7vw,64px);
+  font-weight:400;
+  color:var(--rosa-md);
+  margin-bottom:20px;
+}
+.sobre p{
+  max-width:560px;
+  margin:0 auto;
+  font-size:14.5px;
+  font-weight:300;
+  line-height:1.8;
+  color:#d9c8cf;
+}
+.sobre .redes{
+  margin-top:36px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.sobre .redes a{
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--rosa-md);
+  text-decoration:none;
+  border:1px solid var(--rosa-md);
+  padding:10px 20px;
+  transition:background .2s,color .2s;
+}
+.sobre .redes a:hover{background:var(--rosa-md);color:var(--negro);}
+
+/* ====== FOOTER ====== */
+footer{
+  padding:40px 24px;
+  text-align:center;
+  border-top:1px solid var(--borde);
+}
+.footer-logo{
+  font-family:'Allura',cursive;
+  font-size:36px;
+  color:var(--rosa-dp);
+}
+.footer-sub{
+  font-size:10.5px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--gris);
+  margin-top:6px;
+}
+.footer-copy{
+  font-size:11px;
+  color:var(--borde);
+  margin-top:20px;
+}
+
+/* ====== TOAST ====== */
+.toast{
+  position:fixed;
+  bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--negro);
+  color:var(--crema);
+  padding:12px 24px;
+  font-size:12px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  border-left:3px solid var(--rosa-dp);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  z-index:300;
+  white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:640px){
+  .header-nav{display:none;}
+  .grid{grid-template-columns:repeat(2,1fr);gap:14px;}
+  .card-nombre{font-size:20px;}
+  .filtros{padding:14px 16px;}
+}
+@media(max-width:380px){
+  .grid{grid-template-columns:1fr;}
+}
+@media(prefers-reduced-motion:reduce){
+  .card,.panel-carrito,.overlay,.toast{transition:none;}
+}
+button:focus-visible{outline:2px solid var(--rosa-dp);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">Envíos a todo el país &nbsp;·&nbsp; Mercado Pago, transferencia y efectivo</div>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo-text">María Elena</a>
+    <nav>
+      <ul class="header-nav">
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#sobre">Nosotras</a></li>
+      </ul>
+    </nav>
+    <button class="btn-carrito" id="btnAbrirCarrito">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Carrito
+      <span class="carrito-badge" id="badge">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-me">ME</div>
+  <div class="hero-content">
+    <h1>María Elena</h1>
+    <p class="hero-sub">Perfumería <span>·</span> Cosméticos <span>·</span> Regalería</p>
+    <a href="#catalogo" class="hero-cta">Ver catálogo</a>
+  </div>
+</section>
+
+<!-- FILTROS -->
+<div class="filtros-wrap">
+  <div class="filtros" id="filtros">
+    <button class="activo" data-cat="todos">Todos</button>
+    <button data-cat="perfumeria">Perfumería</button>
+    <button data-cat="cosmetica">Cosméticos</button>
+    <button data-cat="regaleria">Regalería</button>
+    <button data-cat="combos">Combos</button>
+  </div>
+</div>
+
+<!-- CATÁLOGO -->
+<main class="catalogo" id="catalogo">
+
+  <!-- PERFUMERÍA -->
+  <section class="seccion" id="sec-perfumeria" data-section="perfumeria">
+    <div class="sec-header">
+      <h2>Perfumería</h2>
+      <div class="sec-linea"></div>
+      <span class="sec-count">3 productos</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-img"><span class="card-placeholder">foto</span></div>
+        <div class="card-body">
+          <span class="card-marca">Arbel</span>
+          <h3 class="card-nombre">Perfume Árabe Oud Real</h3>
+          <p class="card-desc">Fragancia intensa y duradera, notas amaderadas con toque dulce. 50 ml.</p>
+          <div class="card-footer">
+            <div class="card-precio">$12.500<small>por unidad</small></div>
+            <button class="btn-add" data-nombre="Perfume Árabe Oud Real" data-marca="Arbel" data-precio="12500">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img"><span class="card-placeholder">foto</span></div>
+        <div class="card-body">
+          <span class="card-marca">Milanel</span>
+          <h3 class="card-nombre">Desodorante Mujer Flor Blanca</h3>
+          <p class="card-desc">Protección 48 hs, fragancia floral suave. Sin alcohol. 150 ml.</p>
+          <div class="card-footer">
+            <div class="card-precio">$3.200<small>por unidad</small></div>
+            <button class="btn-add" data-nombre="Desodorante Flor Blanca" data-marca="Milanel" data-precio="3200">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img"><span class="card-placeholder">foto</span></div>
+        <div class="card-body">
+          <span class="card-marca">Saphirus</span>
+          <h3 class="card-nombre">Shampoo y Enjuague Reparador</h3>
+          <p class="card-desc">Dúo nutritivo para cabello dañado con keratina. 2×350 ml.</p>
+          <div class="card-footer">
+            <div class="card-precio">$6.800<small>el dúo</small></div>
+            <button class="btn-add" data-nombre="Shampoo y Enjuague Reparador" data-marca="Saphirus" data-precio="6800">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- COSMÉTICOS -->
+  <section class="seccion" id="sec-cosmetica" data-section="cosmetica">
+    <div class="sec-header">
+      <h2>Cosméticos</h2>
+      <div class="sec-linea"></div>
+      <span class="sec-count">3 productos</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-img"><span class="card-placeholder">foto</span></div>
+        <div class="card-body">
+          <span class="card-marca">Skinker</span>
+          <h3 class="card-nombre">Base Líquida Cobertura Media</h3>
+          <p class="card-desc">Acabado natural, hidratante. Disponible en 6 tonos. 30 ml.</p>
+          <div class="card-footer">
+            <div class="card-precio">$8.900<small>por unidad</small></div>
+            <button class="btn-add" data-nombre="Base Líquida Cobertura Media" data-marca="Skinker" data-precio="8900">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img"><span class="card-placeholder">foto</span></div>
+        <div class="card-body">
+          <span class="card-marca">María Elena</span>
+          <h3 class="card-nombre">Paleta de Sombras Atardecer</h3>
+          <p class="card-desc">12 tonos tierra y rosados, alta pigmentación, larga duración.</p>
+          <div class="card-footer">
+            <div class="card-precio">$7.400<small>por unidad</small></div>
+            <button class="btn-add" data-nombre="Paleta de Sombras Atardecer" data-marca="María Elena" data-precio="7400">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img"><span class="card-placeholder">foto</span></div>
+        <div class="card-body">
+          <span class="card-marca">Skinker</span>
+          <h3 class="card-nombre">Crema Facial Hidratante FPS 30</h3>
+          <p class="card-desc">Uso diario, ácido hialurónico y protección solar. 50 g.</p>
+          <div class="card-footer">
+            <div class="card-precio">$5.600<small>por unidad</small></div>
+            <button class="btn-add" data-nombre="Crema Facial Hidratante FPS 30" data-marca="Skinker" data-precio="5600">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- REGALERÍA -->
+  <section class="seccion" id="sec-regaleria" data-section="regaleria">
+    <div class="sec-header">
+      <h2>Regalería</h2>
+      <div class="sec-linea"></div>
+      <span class="sec-count">4 productos</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-img"><span class="card-placeholder">foto</span></div>
+        <div class="card-body">
+          <span class="card-marca">María Elena</span>
+          <h3 class="card-nombre">Oso de Peluche Grande</h3>
+          <p class="card-desc">45 cm, súper suave, ideal para regalar. Varios colores.</p>
+          <div class="card-footer">
+            <div class="card-precio">$9.500<small>por unidad</small></div>
+            <button class="btn-add" data-nombre="Oso de Peluche Grande" data-marca="María Elena" data-precio="9500">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img"><span class="card-placeholder">foto</span></div>
+        <div class="card-body">
+          <span class="card-marca">María Elena</span>
+          <h3 class="card-nombre">Pulsera y Anillo a Juego</h3>
+          <p class="card-desc">Acero quirúrgico, no se opaca. Set de 2 piezas.</p>
+          <div class="card-footer">
+            <div class="card-precio">$4.200<small>el set</small></div>
+            <button class="btn-add" data-nombre="Pulsera y Anillo a Juego" data-marca="María Elena" data-precio="4200">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img">
+          <span class="card-placeholder">foto</span>
+        </div>
+        <div class="card-body">
+          <span class="card-marca">María Elena</span>
+          <h3 class="card-nombre">Flor Eterna en Cúpula</h3>
+          <p class="card-desc">Rosa preservada bajo cúpula de vidrio con base de madera.</p>
+          <div class="card-footer">
+            <div class="card-precio">$13.800<small>por unidad</small></div>
+            <button class="btn-add" data-nombre="Flor Eterna en Cúpula" data-marca="María Elena" data-precio="13800">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img"><span class="card-placeholder">foto</span></div>
+        <div class="card-body">
+          <span class="card-marca">María Elena</span>
+          <h3 class="card-nombre">Reloj Dama Minimalista</h3>
+          <p class="card-desc">Malla de acero, esfera blanca, resistente al agua. Varios colores.</p>
+          <div class="card-footer">
+            <div class="card-precio">$18.500<small>por unidad</small></div>
+            <button class="btn-add" data-nombre="Reloj Dama Minimalista" data-marca="María Elena" data-precio="18500">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- COMBOS -->
+  <section class="seccion" id="sec-combos" data-section="combos">
+    <div class="sec-header">
+      <h2>Combos especiales</h2>
+      <div class="sec-linea"></div>
+      <span class="sec-count">3 combos</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-img">
+          <span class="badge">Día del Padre</span>
+          <span class="card-placeholder">foto</span>
+        </div>
+        <div class="card-body">
+          <span class="card-marca">María Elena</span>
+          <h3 class="card-nombre">Combo Papá Querido</h3>
+          <p class="card-desc">Portarretrato + llavero personalizado + mini flor eterna. ¡Hacelo único!</p>
+          <div class="card-footer">
+            <div class="card-precio">$11.000<small>el combo</small></div>
+            <button class="btn-add" data-nombre="Combo Papá Querido" data-marca="María Elena" data-precio="11000">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img">
+          <span class="badge oferta">Día de la Madre</span>
+          <span class="card-placeholder">foto</span>
+        </div>
+        <div class="card-body">
+          <span class="card-marca">María Elena</span>
+          <h3 class="card-nombre">Combo Mamá Especial</h3>
+          <p class="card-desc">Crema facial + perfume árabe + flor eterna + caja regalo.</p>
+          <div class="card-footer">
+            <div class="card-precio">$24.500<small>el combo</small></div>
+            <button class="btn-add" data-nombre="Combo Mamá Especial" data-marca="María Elena" data-precio="24500">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img">
+          <span class="badge">Día del Niño</span>
+          <span class="card-placeholder">foto</span>
+        </div>
+        <div class="card-body">
+          <span class="card-marca">María Elena</span>
+          <h3 class="card-nombre">Combo Juguetón</h3>
+          <p class="card-desc">Peluche + juguete sorpresa + recuerdito personalizado.</p>
+          <div class="card-footer">
+            <div class="card-precio">$16.800<small>el combo</small></div>
+            <button class="btn-add" data-nombre="Combo Juguetón" data-marca="María Elena" data-precio="16800">+ Agregar</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- SOBRE NOSOTROS -->
+<section class="sobre" id="sobre">
+  <h2>María Elena Beauty</h2>
+  <p>Somos un emprendimiento familiar con amor por los detalles. Encontrás perfumería, cosméticos y regalería pensados para hacer sentir especial a cada persona. Enviamos a todo el país y trabajamos con las mejores marcas: Arbel, Milanel, Saphirus, Skinker y más.</p>
+  <div class="redes">
+    <a href="https://www.instagram.com/maria_elena_beauty_ar" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/MariaElenaBeauty" target="_blank">Facebook</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">María Elena</div>
+  <p class="footer-sub">Perfumería · Cosméticos · Regalería</p>
+  <p class="footer-copy">© 2025 María Elena Beauty · Formosa, Argentina</p>
+</footer>
+
+<!-- CARRITO PANEL -->
+<div class="overlay" id="overlay"></div>
+<aside class="panel-carrito" id="panelCarrito" aria-label="Carrito de compras">
+  <div class="panel-header">
+    <h2>Tu carrito</h2>
+    <button class="btn-cerrar" id="btnCerrarCarrito" aria-label="Cerrar carrito">✕</button>
+  </div>
+
+  <div class="panel-items" id="panelItems">
+    <div class="carrito-vacio" id="carritoVacio">
+      <div class="icon">🛍️</div>
+      <p>Tu carrito está vacío.<br>¡Agregá algo lindo!</p>
+    </div>
+  </div>
+
+  <div class="panel-footer" id="panelFooter" style="display:none">
+    <div class="total-row">
+      <span class="total-label">Subtotal</span>
+      <span class="total-monto" id="totalMonto">$0</span>
+    </div>
+
+    <div>
+      <p style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gris);margin-bottom:10px;">Entrega</p>
+      <div class="envio-opciones">
+        <label class="envio-opcion">
+          <input type="radio" name="envio" value="envio" checked>
+          <div class="envio-opcion-info">
+            <div class="envio-opcion-nombre">Envío a domicilio</div>
+            <div class="envio-opcion-sub">Correo Argentino · A coordinar</div>
+          </div>
+          <span class="envio-precio">A consultar</span>
+        </label>
+        <label class="envio-opcion">
+          <input type="radio" name="envio" value="retiro">
+          <div class="envio-opcion-info">
+            <div class="envio-opcion-nombre">Retiro en persona</div>
+            <div class="envio-opcion-sub">Formosa capital · A coordinar</div>
+          </div>
+          <span class="envio-precio">Gratis</span>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn-wsp" id="btnWsp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Hacer pedido por WhatsApp
+    </button>
+
+    <p class="pago-info">Aceptamos Mercado Pago, transferencia bancaria y efectivo.<br>Te confirmamos el pedido por WhatsApp.</p>
+  </div>
+</aside>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== DATOS ======
+let carrito = [];
+let carritoAbierto = false;
+
+// ====== NÚMERO WHATSAPP (cambiá este número por el tuyo) ======
+const WHATSAPP_NUM = '5491100000000'; // reemplazar por tu número con código de país
+
+// ====== CARRITO ======
+function abrirCarrito(){
+  carritoAbierto = true;
+  document.getElementById('panelCarrito').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function cerrarCarrito(){
+  carritoAbierto = false;
+  document.getElementById('panelCarrito').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('btnAbrirCarrito').addEventListener('click', abrirCarrito);
+document.getElementById('btnCerrarCarrito').addEventListener('click', cerrarCarrito);
+document.getElementById('overlay').addEventListener('click', cerrarCarrito);
+
+// ====== AGREGAR AL CARRITO ======
+document.querySelectorAll('.btn-add').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const nombre  = btn.dataset.nombre;
+    const marca   = btn.dataset.marca;
+    const precio  = parseInt(btn.dataset.precio);
+    const existe  = carrito.find(i => i.nombre === nombre);
+
+    if(existe){
+      existe.qty++;
+    } else {
+      carrito.push({ nombre, marca, precio, qty:1, id: Date.now() });
+    }
+
+    btn.textContent = '✓ Agregado';
+    btn.classList.add('agregado');
+    setTimeout(() => {
+      btn.textContent = '+ Agregar';
+      btn.classList.remove('agregado');
+    }, 1600);
+
+    renderCarrito();
+    mostrarToast(`"${nombre}" agregado al carrito`);
+  });
+});
+
+// ====== RENDER CARRITO ======
+function renderCarrito(){
+  const items = document.getElementById('panelItems');
+  const footer = document.getElementById('panelFooter');
+  const vacio  = document.getElementById('carritoVacio');
+  const badge  = document.getElementById('badge');
+  const total  = document.getElementById('totalMonto');
+
+  const totalQty = carrito.reduce((s,i) => s + i.qty, 0);
+  const totalPrecio = carrito.reduce((s,i) => s + i.precio * i.qty, 0);
+
+  // badge
+  badge.textContent = totalQty;
+  badge.classList.toggle('visible', totalQty > 0);
+
+  if(carrito.length === 0){
+    vacio.style.display = '';
+    footer.style.display = 'none';
+    // limpiar items excepto vacio
+    Array.from(items.querySelectorAll('.item-carrito')).forEach(el => el.remove());
+    return;
+  }
+
+  vacio.style.display = 'none';
+  footer.style.display = '';
+
+  // limpiar y redibujar items
+  Array.from(items.querySelectorAll('.item-carrito')).forEach(el => el.remove());
+
+  carrito.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'item-carrito';
+    div.innerHTML = `
+      <div class="item-thumb">foto</div>
+      <div class="item-info">
+        <div class="item-marca">${item.marca}</div>
+        <div class="item-nombre">${item.nombre}</div>
+        <div class="item-controles">
+          <button class="btn-qty" data-id="${item.id}" data-action="menos">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="btn-qty" data-id="${item.id}" data-action="mas">+</button>
+        </div>
+      </div>
+      <span class="item-precio">${formatPrecio(item.precio * item.qty)}</span>
+      <button class="btn-quitar" data-id="${item.id}" aria-label="Quitar">✕</button>
+    `;
+    items.insertBefore(div, vacio);
+  });
+
+  total.textContent = formatPrecio(totalPrecio);
+
+  // eventos qty / quitar
+  items.querySelectorAll('.btn-qty').forEach(b => {
+    b.addEventListener('click', () => {
+      const id = parseInt(b.dataset.id);
+      const idx = carrito.findIndex(i => i.id === id);
+      if(b.dataset.action === 'mas'){
+        carrito[idx].qty++;
+      } else {
+        carrito[idx].qty--;
+        if(carrito[idx].qty <= 0) carrito.splice(idx, 1);
+      }
+      renderCarrito();
+    });
+  });
+  items.querySelectorAll('.btn-quitar').forEach(b => {
+    b.addEventListener('click', () => {
+      const id = parseInt(b.dataset.id);
+      carrito = carrito.filter(i => i.id !== id);
+      renderCarrito();
+    });
+  });
+}
+
+// ====== WHATSAPP CHECKOUT ======
+document.getElementById('btnWsp').addEventListener('click', () => {
+  if(carrito.length === 0) return;
+  const envio = document.querySelector('input[name="envio"]:checked').value;
+  const envioTexto = envio === 'envio' ? 'Envío a domicilio (a coordinar)' : 'Retiro en persona - Formosa capital';
+  const total = carrito.reduce((s,i) => s + i.precio * i.qty, 0);
+
+  let msg = '¡Hola! Quiero hacer un pedido en *María Elena Beauty* 🛍️\n\n';
+  msg += '*Productos:*\n';
+  carrito.forEach(i => {
+    msg += `▸ ${i.nombre} x${i.qty} — ${formatPrecio(i.precio * i.qty)}\n`;
+  });
+  msg += `\n*Total productos:* ${formatPrecio(total)}`;
+  msg += `\n*Entrega:* ${envioTexto}`;
+  msg += '\n\n¿Cómo coordino el pago? (MP / transferencia / efectivo)';
+
+  const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+});
+
+// ====== FILTROS ======
+document.querySelectorAll('#filtros button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#filtros button').forEach(b => b.classList.remove('activo'));
+    btn.classList.add('activo');
+    const cat = btn.dataset.cat;
+
+    document.querySelectorAll('.seccion').forEach(sec => {
+      if(cat === 'todos' || sec.dataset.section === cat){
+        sec.removeAttribute('hidden');
+      } else {
+        sec.setAttribute('hidden','');
+      }
+    });
+  });
+});
+
+// ====== TOAST ======
+let toastTimer;
+function mostrarToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ====== HELPERS ======
+function formatPrecio(n){
+  return '$' + n.toLocaleString('es-AR');
+}
+</script>
+</body>
+</html>
